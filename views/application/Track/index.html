@@ -1,0 +1,106 @@
+{% extends '../template/base.html' %} {% load staticfiles %} {% block content %}
+<script src="{% static 'application/pages/trackPage.js' %}"></script>
+<div class="content-box-large" method="post">
+    {% csrf_token %}
+    <div class="panel-heading">
+        <div class="panel-title">Track</div>
+    </div>
+
+    <div class="panel-body">
+        <div class="control-group">
+            {% for field in form %}
+            <div class="col-xs-12">
+                <div class="control-group">
+                    {% if field.name == 'album' %}
+                    <label class="control-label">{{field.label}}</label> {{ field }}
+                    <div name="search_sel" style="margin-top:18px"></div>
+                    {% else %}
+                    <label class="control-label">{{field.label}}</label> {{ field }} 
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="control-group col-xs-offset-9">
+            <button class="btn btn-lg btn-warning" name="btn_video">Video</button>
+            <button name="btn_save" class="btn btn-lg btn-success" data-loading-text="loading.....">save</button>
+            <button class="btn btn-lg btn-primary" name="btn_reset">reset</button>
+        </div>
+    </div>
+</div>
+
+<div class="content-box-large">
+    <div class="panel-heading">
+        <div class="panel-title">Track List</div>
+        <div class="panel-options">
+            <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search for...">
+            <span class="input-group-btn"><button name="btn_search" class="btn btn-default" type="button">Go!</button></span>
+        </div>
+        <ul class="pagination pull-right">
+            {% if data.has_previous %}
+            <li class="prev"><a name="prev_data" href="?page={{ data.previous_page_number }}">Prev</a></li>
+            {% endif %}
+            <li class="page active"><a href="#" name="page_text">Page {{ data.number }} of {{ data.paginator.num_pages }}</a></li>
+            {% if data.has_next %}
+            <li class="next"><a name="next_data" href="?page={{ data.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        <button class="btn btn-lg btn-primary" name="btn_edit" data-id="{{ item.id }}"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+                        <button class="btn btn-lg btn-danger" name="btn_delete" data-id="{{ item.id }}"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pagination pull-right">
+            {% if data.has_previous %}
+            <li class="prev"><a name="prev_data" href="?page={{ data.previous_page_number }}">Prev</a></li>
+            {% endif %}
+            <li class="page active"><a href="#" name="page_text">Page {{ data.number }} of {{ data.paginator.num_pages }}</a></li>
+            {% if data.has_next %}
+            <li class="next"><a name="next_data" href="?page={{ data.next_page_number }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg-mVideo" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="content-box-large">
+            <h1>Add Video</h1>
+            <div class="row">
+                <div class="col-xs-12">
+                    <label>Video</label><br />
+                    <select name="video" class="form-control">
+                </select>
+                    <hr />
+                    <button name="btn_add_video" class="btn btn-lg btn-info">Add</button>
+                    <ol name="video_lst"></ol>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+{% endblock %}

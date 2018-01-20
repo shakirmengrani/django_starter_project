@@ -1,0 +1,13 @@
+{% extends '../template/base.html' %} {% load staticfiles %} {% block content %}
+<div class="ui-widget">
+    <input type="text" class="form-control" name="hello" />
+    <div name="search_sel" style="margin-top:18px"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("[name='hello']").search({
+            url: '/application/album/'
+        });
+    });
+</script>
+{% endblock %}

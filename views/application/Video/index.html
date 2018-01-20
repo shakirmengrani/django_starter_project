@@ -1,0 +1,26 @@
+{% extends '../template/base.html' %} {% load staticfiles %} {% block content %}
+<script src="{% static 'application/pages/videoPage.js' %}"></script>
+<div class="content-box-large">
+    {% csrf_token %}
+    <div class="panel-heading">
+        <div class="panel-title">Video</div>
+    </div>
+
+    <div class="panel-body">
+        <div class="control-group">
+            {% for field in form %}
+            <div class="col-xs-12">
+                <div class="control-group">
+                    <label class="control-label">{{field.label}}</label> {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="control-group col-xs-offset-10">
+        <button name="btn_save" class="btn btn-lg btn-success" data-loading-text="saving.....">save</button>
+        <button class="btn btn-lg btn-primary" name="btn_reset">reset</button>
+    </div>
+</div>
+
+{% endblock %}

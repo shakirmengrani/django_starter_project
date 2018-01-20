@@ -1,0 +1,55 @@
+{% extends '../../template/base.html' %} {% load staticfiles %} {% block content %}
+<script src="{% static 'application/pages/ArtistPage.js' %}"></script>
+<div class="content-box-large">
+    {% csrf_token %}
+    <div class="panel-heading">
+        <div class="panel-title">Artist</div>
+    </div>
+    <div class="panel-body">
+        {% for field in form %}
+        <div class="control-group">
+            <label class="control-label">{{field.label}}</label>
+            {{ field }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="control-group col-xs-offset-10">
+        <input type="submit" name="btn_save" value="Save" class="btn btn-lg btn-success" />
+        <button name="btn_reset" class="btn btn-lg btn-primary">Reset</button>
+    </div>
+</div>
+
+<!--Arist List -->
+<div class="content-box-large">
+    <div class="panel-heading">
+        <div class="panel-title">Category List</div>
+        <div class="panel-options">
+            <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-responsive table-bordered dTable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        <button class="btn btn-lg btn-primary" name="btn_edit" data-id="{{ item.id }}"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+                        <button class="btn btn-lg btn-danger" name="btn_delete" data-id="{{ item.id }}"><i class="glyphicon glyphicon-remove"></i> Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

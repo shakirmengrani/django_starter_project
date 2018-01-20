@@ -1,0 +1,33 @@
+{% extends "./base.html" %} {% load staticfiles %} {% block content %}
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script src="{% static 'application/pages/firebaseuiPage.js' %}"></script>
+<div class="col-md-4 col-md-offset-4">
+    <div class="login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Sign In</h6>
+                <div class="col-xs-12">
+                    <input type="text" name="username" autofocus="" class="form-control" required="" id="id_username" maxlength="254" placeholder="username">
+                </div>
+                <div class="col-xs-12">
+                    <input type="password" class="form-control" name="password" required="" id="id_password" placeholder="password">
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                        <button class="btn btn-primary" name="btn_sign_in">SignIn</button>
+                        &nbsp;
+                        <button class="btn btn-primary" name="btn_sign_up">SignUp</button>
+                        <hr />
+                        <button class="btn btn-block btn-social btn-google" name="btn_sign_gp"><span class="fa fa-google"></span>Sign in with G+</button>
+                        <button class="btn btn-block btn-social btn-facebook" name="btn_sign_fb"><span class="fa fa-facebook"></span>Sign in with FaceBook</button>
+                        <button class="btn btn-block btn-social btn-twitter" name="btn_sign_tw"><span class="fa fa-twitter"></span>Sign in with Twitter</button>
+                        <hr />
+                        <button class="btn btn-block btn-primary" name="btn_sign_out">Signout</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
